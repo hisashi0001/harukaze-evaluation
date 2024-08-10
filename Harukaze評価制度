@@ -182,3 +182,28 @@
     </script>
 </body>
 </html>
+function saveEvaluation() {
+    // フォームデータの取得
+    const formData = {
+        evaluatee: document.getElementById('evaluatee').value,
+        evaluator: document.getElementById('evaluator').value,
+        period: document.getElementById('period').value,
+        // 他の入力フィールドも同様に取得
+    };
+
+    // ローカルストレージにデータを保存
+    localStorage.setItem('harukazeEvaluation', JSON.stringify(formData));
+    alert('評価が保存されました。');
+}
+
+// ページ読み込み時に保存データを復元
+window.onload = function() {
+    const savedData = localStorage.getItem('harukazeEvaluation');
+    if (savedData) {
+        const formData = JSON.parse(savedData);
+        document.getElementById('evaluatee').value = formData.evaluatee;
+        document.getElementById('evaluator').value = formData.evaluator;
+        document.getElementById('period').value = formData.period;
+        // 他のフィールドも同様に復元
+    }
+};
